@@ -34,10 +34,6 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = findViewById(R.id.drawerLayout)
 
-        sharedFile = "com.example.satujiwa160419137"
-        shared = getSharedPreferences(sharedFile,Context.MODE_PRIVATE)
-        editor = shared.edit()
-
         navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
         NavigationUI.setupActionBarWithNavController(this,navController)
 

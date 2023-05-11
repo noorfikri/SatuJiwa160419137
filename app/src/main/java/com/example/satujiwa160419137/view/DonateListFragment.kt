@@ -1,5 +1,7 @@
 package com.example.satujiwa160419137.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,7 +30,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DonateListFragment : Fragment() {
-    private lateinit var accountViewModel: AccountLoginViewModel
     private lateinit var donateListViewModel: DonationListViewModel
     private val  donateListAdapter = DonateListAdapter(arrayListOf())
 
@@ -43,31 +44,23 @@ class DonateListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedFile = "com.example.satujiwa160419137"
+        val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+
+        if(sharedPref.getString("LOGGED_ID","")==""){
+            val action = DonateListFragmentDirections.actionLogoutHome()
+            Navigation.findNavController(view).navigate(action)
+        }
+
         val recView = view.findViewById<RecyclerView>(R.id.recViewDonateList)
 
-        accountViewModel = ViewModelProvider(this).get(AccountLoginViewModel::class.java)
         donateListViewModel = ViewModelProvider(this).get(DonationListViewModel::class.java)
         donateListViewModel.getDonation()
 
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = donateListAdapter
 
-        observeLoginViewModel(view)
         observeDonateListViewModel(view)
-    }
-
-
-    fun observeLoginViewModel(view: View){
-        accountViewModel.loginAccountLD.observe(viewLifecycleOwner,{
-            Log.d("checklogin","checking login")
-            if(it == null){
-                val action = DonateListFragmentDirections.actionLogoutHome()
-                Navigation.findNavController(view).navigate(action)
-                Log.d("checklogin","account not loged in")
-            }else if (it != null){
-                Log.d("checklogin","account logged")
-            }
-        })
     }
 
     fun observeDonateListViewModel(view: View){

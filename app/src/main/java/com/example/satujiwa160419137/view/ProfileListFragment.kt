@@ -1,5 +1,6 @@
 package com.example.satujiwa160419137.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.satujiwa160419137.R
@@ -35,6 +37,13 @@ class ProfileListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedFile = "com.example.satujiwa160419137"
+        val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+        if(sharedPref.getString("LOGGED_ID","")==""){
+            val action = ProfileListFragmentDirections.actionLogoutProfileList()
+            Navigation.findNavController(view!!).navigate(action)
+        }
 
         val recView = view.findViewById<RecyclerView>(R.id.recViewProfileList)
 

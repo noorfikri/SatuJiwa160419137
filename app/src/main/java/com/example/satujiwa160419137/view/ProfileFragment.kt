@@ -1,5 +1,6 @@
 package com.example.satujiwa160419137.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.util.loadImage
+import com.example.satujiwa160419137.viewmodel.AccountDetailViewModel
 import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
-    private lateinit var accoutLoginViewModel: AccountLoginViewModel
+    private lateinit var accountDetailViewModel: AccountDetailViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +40,19 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedFile = "com.example.satujiwa160419137"
+        val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+        var loggedID = ""
+
+        if(sharedPref.getString("LOGGED_ID","")!=""){
+            loggedID = sharedPref.getString("LOGGED_ID","").toString()
+        }
+
         val btnEditProfile = view.findViewById<Button>(R.id.btnToEditProfile)
         val btnLogout = view.findViewById<Button>(R.id.btnLogout2)
 
-        accoutLoginViewModel = ViewModelProvider(this).get(AccountLoginViewModel::class.java)
+        accountDetailViewModel = ViewModelProvider(this).get(AccountDetailViewModel::class.java)
+        accountDetailViewModel.get(loggedID)
 
         observeAccountViewModel(view)
 
@@ -51,18 +62,20 @@ class ProfileFragment : Fragment() {
     }
 
     fun observeAccountViewModel(view: View){
-        accoutLoginViewModel.loginAccountLD.observe(viewLifecycleOwner,{
+        accountDetailViewModel.accountLD.observe(viewLifecycleOwner,{
             val txtUsername = view.findViewById<TextView>(R.id.txtProfileUsername)
             val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
 
             txtUsername.text = it.username.toString()
             imgProfile.loadImage(it.imgUrl)
-            Log.d("profile",it.toString())
         })
     }
 
     fun doLogout(view: View){
-        accoutLoginViewModel.logout()
+        val sharedFile = "com.example.satujiwa160419137"
+        val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+
+        sharedPref.edit().putString("LOGGED_ID","").apply()
 
         val action = ProfileFragmentDirections.actionLogoutProfile()
         Navigation.findNavController(view).navigate(action)

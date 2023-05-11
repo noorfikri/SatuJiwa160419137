@@ -1,5 +1,6 @@
 package com.example.satujiwa160419137.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -58,11 +59,14 @@ class LoginFragment : Fragment() {
     }
 
     fun doLogin(username:String,password:String, view:View){
+        val sharedFile = "com.example.satujiwa160419137"
+        val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+
         accountsViewModel.accountsLD.observe(viewLifecycleOwner,{
             it.forEach {
                 if(it.username==username){
                     if(it.password==password){
-                        loginAccountViewModel.login(it)
+                        sharedPref.edit().putString("LOGGED_ID",it.id.toString()).apply()
 
                         val action = LoginFragmentDirections.actionLogin()
                         Navigation.findNavController(view).navigate(action)
