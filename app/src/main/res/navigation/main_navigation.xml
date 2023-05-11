@@ -87,5 +87,8 @@
         <action
             android:id="@+id/actionProfileDetailBack"
             app:destination="@id/itemList" />
+        <argument
+            android:name="accountId"
+            app:argType="integer" />
     </fragment>
 </navigation>

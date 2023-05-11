@@ -20,6 +20,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var shared:SharedPreferences
     lateinit var editor:SharedPreferences.Editor
 
+    init {
+        instance = this
+    }
+
+    companion object{
+        var instance:MainActivity ?= null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
