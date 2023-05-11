@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        drawerLayout = findViewById(R.id.drawerLayout)
+
         sharedFile = "com.example.satujiwa160419137"
         shared = getSharedPreferences(sharedFile,Context.MODE_PRIVATE)
         editor = shared.edit()
@@ -34,10 +36,6 @@ class MainActivity : AppCompatActivity() {
         var bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.setupWithNavController(navController)
 
-
-        drawerLayout = findViewById(R.id.drawerLayout)
-        navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
-
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 
         val navView = findViewById<NavigationView>(R.id.navView)
@@ -47,9 +45,5 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, drawerLayout) || super.onSupportNavigateUp()
-    }
-
-    fun checkLogin(){
-
     }
 }

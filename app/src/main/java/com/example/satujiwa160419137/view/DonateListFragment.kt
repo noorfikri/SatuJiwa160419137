@@ -1,6 +1,7 @@
 package com.example.satujiwa160419137.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,17 +36,20 @@ class DonateListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         accountViewModel = ViewModelProvider(this).get(AccountLoginViewModel::class.java)
-        accountViewModel.checkLogin()
 
         observeLoginViewModel(view)
     }
 
 
     fun observeLoginViewModel(view: View){
-        accountViewModel.isLogedInLD.observe(viewLifecycleOwner,{
-            if(it==false){
+        accountViewModel.loginAccountLD.observe(viewLifecycleOwner,{
+            Log.d("checklogin","checking login")
+            if(it == null){
                 val action = DonateListFragmentDirections.actionLogoutHome()
                 Navigation.findNavController(view).navigate(action)
+                Log.d("checklogin","account not loged in")
+            }else if (it != null){
+                Log.d("checklogin","account logged")
             }
         })
     }

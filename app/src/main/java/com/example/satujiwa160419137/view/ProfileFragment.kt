@@ -1,6 +1,7 @@
 package com.example.satujiwa160419137.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +57,7 @@ class ProfileFragment : Fragment() {
 
             txtUsername.text = it.username.toString()
             imgProfile.loadImage(it.imgUrl)
+            Log.d("profile",it.toString())
         })
     }
 

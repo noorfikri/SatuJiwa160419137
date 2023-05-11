@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/itemHome">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -33,36 +33,17 @@
         tools:layout="@layout/fragment_donate_list" >
         <action
             android:id="@+id/actionLogoutHome"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/actionCreateDonation"
-            app:destination="@id/donateCreateFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
         <action
             android:id="@+id/actionDetailDonation"
             app:destination="@id/donateDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/donateAddFragment"
-        android:name="com.example.satujiwa160419137.view.DonateAddFragment"
-        android:label="fragment_donate_add"
-        tools:layout="@layout/fragment_donate_add" />
-    <fragment
-        android:id="@+id/donateCreateFragment"
-        android:name="com.example.satujiwa160419137.view.DonateCreateFragment"
-        android:label="fragment_donate_create"
-        tools:layout="@layout/fragment_donate_create" >
-        <action
-            android:id="@+id/actionCreateDonationBack"
-            app:destination="@id/itemHome" />
     </fragment>
     <fragment
         android:id="@+id/donateDetailFragment"
         android:name="com.example.satujiwa160419137.view.DonateDetailFragment"
         android:label="fragment_donate_detail"
         tools:layout="@layout/fragment_donate_detail" >
-        <action
-            android:id="@+id/actionAddDonation"
-            app:destination="@id/donateAddFragment" />
         <action
             android:id="@+id/actionDonationDetailBack"
             app:destination="@id/itemHome" />
@@ -74,7 +55,8 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/actionLogoutProfile"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
         <action
             android:id="@+id/actionEditProfile"
             app:destination="@id/profileEditFragment" />
@@ -87,5 +69,23 @@
         <action
             android:id="@+id/actionProfileEditBack"
             app:destination="@id/itemProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemList"
+        android:name="com.example.satujiwa160419137.view.ProfileListFragment"
+        android:label="fragment_profile_list"
+        tools:layout="@layout/fragment_profile_list" >
+        <action
+            android:id="@+id/actionProfileDetail"
+            app:destination="@id/profileDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileDetailFragment"
+        android:name="com.example.satujiwa160419137.view.ProfileDetailFragment"
+        android:label="fragment_profile_detail"
+        tools:layout="@layout/fragment_profile_detail" >
+        <action
+            android:id="@+id/actionProfileDetailBack"
+            app:destination="@id/itemList" />
     </fragment>
 </navigation>
