@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.util.loadImage
+import com.example.satujiwa160419137.viewmodel.DonationDetailViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DonateDetailFragment : Fragment() {
+    private lateinit var donateDetailViewModel:DonationDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,4 +33,39 @@ class DonateDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_donate_detail, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var donateID = ""
+
+        if(arguments!=null){
+            donateID = DonateDetailFragmentArgs.fromBundle(requireArguments()).donateID
+        }
+
+        donateDetailViewModel = ViewModelProvider(this).get(DonationDetailViewModel::class.java)
+        donateDetailViewModel.get(donateID)
+
+        observeDonateDetailViewModel(view)
+    }
+
+    fun observeDonateDetailViewModel(view: View){
+        donateDetailViewModel.donationLD.observe(viewLifecycleOwner,{
+            val txtTitle = view.findViewById<TextView>(R.id.txtTitleDonateDetail)
+            val txtCurVal = view.findViewById<TextView>(R.id.txtCurrDonate3)
+            val txtGoalVal = view.findViewById<TextView>(R.id.txtGoalDonate3)
+            val txtDetail = view.findViewById<TextView>(R.id.txtDonateDetail)
+            val txtCreator = view.findViewById<TextView>(R.id.txtCreatorDonateDetail)
+            val imgDonate = view.findViewById<ImageView>(R.id.imgViewDonateDetail)
+            val imgCreator = view.findViewById<ImageView>(R.id.imgDonateCreatorDetail)
+
+            txtTitle.text = it.title.toString()
+            txtCurVal.text = it.curVal.toString()
+            txtGoalVal.text = it.goalVal.toString()
+            txtDetail.text = it.detail.toString()
+            txtCreator.text = it.creator!!.username.toString()
+
+            imgDonate.loadImage(it.img)
+            imgCreator.loadImage(it.creator.imgUrl)
+        })
+    }
 }

@@ -47,6 +47,9 @@
         <action
             android:id="@+id/actionDonationDetailBack"
             app:destination="@id/itemHome" />
+        <argument
+            android:name="donateID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/itemProfile"
