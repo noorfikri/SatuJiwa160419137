@@ -3,21 +3,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/donateListFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.satujiwa160419137.view.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/actionRegisterAccount"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/actionLogin"
+            app:destination="@id/itemHome" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.satujiwa160419137.view.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/actionRegisterBack"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/donateListFragment"
+        android:id="@+id/itemHome"
         android:name="com.example.satujiwa160419137.view.DonateListFragment"
         android:label="fragment_donate_list"
-        tools:layout="@layout/fragment_donate_list" />
+        tools:layout="@layout/fragment_donate_list" >
+        <action
+            android:id="@+id/actionLogoutHome"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/actionCreateDonation"
+            app:destination="@id/donateCreateFragment" />
+        <action
+            android:id="@+id/actionDetailDonation"
+            app:destination="@id/donateDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/donateAddFragment"
+        android:name="com.example.satujiwa160419137.view.DonateAddFragment"
+        android:label="fragment_donate_add"
+        tools:layout="@layout/fragment_donate_add" />
+    <fragment
+        android:id="@+id/donateCreateFragment"
+        android:name="com.example.satujiwa160419137.view.DonateCreateFragment"
+        android:label="fragment_donate_create"
+        tools:layout="@layout/fragment_donate_create" >
+        <action
+            android:id="@+id/actionCreateDonationBack"
+            app:destination="@id/itemHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/donateDetailFragment"
+        android:name="com.example.satujiwa160419137.view.DonateDetailFragment"
+        android:label="fragment_donate_detail"
+        tools:layout="@layout/fragment_donate_detail" >
+        <action
+            android:id="@+id/actionAddDonation"
+            app:destination="@id/donateAddFragment" />
+        <action
+            android:id="@+id/actionDonationDetailBack"
+            app:destination="@id/itemHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemProfile"
+        android:name="com.example.satujiwa160419137.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/actionLogoutProfile"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/actionEditProfile"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.example.satujiwa160419137.view.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" >
+        <action
+            android:id="@+id/actionProfileEditBack"
+            app:destination="@id/itemProfile" />
+    </fragment>
 </navigation>

@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.util.loadImage
+import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,18 +25,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var accoutLoginViewModel: AccountLoginViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,23 +34,36 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btnEditProfile = view.findViewById<Button>(R.id.btnToEditProfile)
+        val btnLogout = view.findViewById<Button>(R.id.btnLogout2)
+
+        accoutLoginViewModel = ViewModelProvider(this).get(AccountLoginViewModel::class.java)
+
+        observeAccountViewModel(view)
+
+        btnLogout.setOnClickListener {
+            doLogout(view)
+        }
     }
+
+    fun observeAccountViewModel(view: View){
+        accoutLoginViewModel.loginAccountLD.observe(viewLifecycleOwner,{
+            val txtUsername = view.findViewById<TextView>(R.id.txtProfileUsername)
+            val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+
+            txtUsername.text = it.username.toString()
+            imgProfile.loadImage(it.imgUrl)
+        })
+    }
+
+    fun doLogout(view: View){
+        accoutLoginViewModel.logout()
+
+        val action = ProfileFragmentDirections.actionLogoutProfile()
+        Navigation.findNavController(view).navigate(action)
+    }
+
 }
