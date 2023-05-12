@@ -14,6 +14,10 @@
             android:id="@+id/actionLogin"
             app:destination="@id/itemHome"
             app:popUpTo="@id/itemHome" />
+        <action
+            android:id="@+id/actionRegisterAccount"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemHome"
@@ -89,7 +93,8 @@
             app:destination="@id/profileDetailFragment" />
         <action
             android:id="@+id/actionLogoutProfileList"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileDetailFragment"
@@ -102,5 +107,15 @@
         <argument
             android:name="accountId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.satujiwa160419137.view.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/actionRegisterBack"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 </navigation>

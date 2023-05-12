@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,6 +28,17 @@ class RegisterFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btnRegister = view.findViewById<Button>(R.id.btnRegister)
+
+        btnRegister.setOnClickListener {
+            val action = RegisterFragmentDirections.actionRegisterBack()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
 }
