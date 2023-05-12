@@ -36,21 +36,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="40dp"
-            android:fontFamily="@font/alata"
-            android:text="Tidak memiliki akun?"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.217"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout2"
             android:layout_width="0dp"
@@ -102,20 +87,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btnToRegister"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="32dp"
-            android:fontFamily="@font/alata"
-            android:text="Daftar"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-            app:layout_constraintStart_toEndOf="@+id/textView3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

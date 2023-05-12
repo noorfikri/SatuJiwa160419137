@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.model.Account
 import com.example.satujiwa160419137.util.loadImage
 import com.example.satujiwa160419137.viewmodel.AccountDetailViewModel
 import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
@@ -29,6 +30,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class ProfileFragment : Fragment() {
     private lateinit var accountDetailViewModel: AccountDetailViewModel
+    var loggedID = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,35 +42,68 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val btnEditProfile = view.findViewById<Button>(R.id.btnToEditProfile)
+        val txtUsername = view.findViewById<TextView>(R.id.txtProfileUsername)
+        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        var usernameEditTemp =""
+        var linkEditTemp =""
+
         val sharedFile = "com.example.satujiwa160419137"
         val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
-        var loggedID = ""
 
         if(sharedPref.getString("LOGGED_ID","")!=""){
             loggedID = sharedPref.getString("LOGGED_ID","").toString()
         }
 
-        val btnEditProfile = view.findViewById<Button>(R.id.btnToEditProfile)
+
+
         val btnLogout = view.findViewById<Button>(R.id.btnLogout2)
 
         accountDetailViewModel = ViewModelProvider(this).get(AccountDetailViewModel::class.java)
         accountDetailViewModel.get(loggedID)
 
-        observeAccountViewModel(view)
+
+        if (arguments != null){
+
+            usernameEditTemp = ProfileFragmentArgs.fromBundle(requireArguments()).tempEditUsernameProfile.toString()
+            linkEditTemp = ProfileFragmentArgs.fromBundle(requireArguments()).tempEditLinkProfile.toString()
+
+            if(usernameEditTemp.equals("_")|| linkEditTemp.equals("_")){
+                observeAccountViewModel(view)
+            }else{
+                Log.d("usernameedit",usernameEditTemp.toString())
+                Log.d("linkedit",linkEditTemp.toString())
+                txtUsername.text = usernameEditTemp
+                imgProfile.loadImage(linkEditTemp)
+            }
+
+        }
 
         btnLogout.setOnClickListener {
             doLogout(view)
         }
+
+        btnEditProfile.setOnClickListener {
+            val action = ProfileFragmentDirections.actionEditProfile(usernameEditTemp.toString(), linkEditTemp.toString(), loggedID)
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     fun observeAccountViewModel(view: View){
-        accountDetailViewModel.accountLD.observe(viewLifecycleOwner,{
-            val txtUsername = view.findViewById<TextView>(R.id.txtProfileUsername)
-            val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        val txtUsername = view.findViewById<TextView>(R.id.txtProfileUsername)
+        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        var usernameEditTemp = ""
+        var linkEditTemp = ""
 
-            txtUsername.text = it.username.toString()
-            imgProfile.loadImage(it.imgUrl)
-        })
+            accountDetailViewModel.accountLD.observe(viewLifecycleOwner,{
+
+                txtUsername.text = it.username.toString()
+                imgProfile.loadImage(it.imgUrl)
+
+                usernameEditTemp = it.username.toString()
+                linkEditTemp = it.imgUrl.toString()
+            })
+
     }
 
     fun doLogout(view: View){

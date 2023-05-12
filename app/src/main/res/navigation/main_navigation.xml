@@ -11,21 +11,9 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/actionRegisterAccount"
-            app:destination="@id/registerFragment" />
-        <action
             android:id="@+id/actionLogin"
             app:destination="@id/itemHome"
             app:popUpTo="@id/itemHome" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.satujiwa160419137.view.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/actionRegisterBack"
-            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemHome"
@@ -64,6 +52,14 @@
         <action
             android:id="@+id/actionEditProfile"
             app:destination="@id/profileEditFragment" />
+        <argument
+            android:name="tempEditUsernameProfile"
+            app:argType="string"
+            android:defaultValue="_" />
+        <argument
+            android:name="tempEditLinkProfile"
+            app:argType="string"
+            android:defaultValue="_" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
@@ -73,6 +69,15 @@
         <action
             android:id="@+id/actionProfileEditBack"
             app:destination="@id/itemProfile" />
+        <argument
+            android:name="tempEditUsernameEdit"
+            app:argType="string" />
+        <argument
+            android:name="tempEditLinkEdit"
+            app:argType="string" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/itemList"

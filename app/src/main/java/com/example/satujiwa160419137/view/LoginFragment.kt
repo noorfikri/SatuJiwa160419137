@@ -42,16 +42,10 @@ class LoginFragment : Fragment() {
         val txtUsername = view.findViewById<TextInputEditText>(R.id.txtUsernameLogin)
         val txtPassword = view.findViewById<TextInputEditText>(R.id.txtPasswordLogin)
         val btnLogin = view.findViewById<Button>(R.id.btnToLogin)
-        val btnRegister = view.findViewById<Button>(R.id.btnToRegister)
 
         accountsViewModel = ViewModelProvider(this).get(AccountListViewModel::class.java)
         loginAccountViewModel = ViewModelProvider(this).get(AccountLoginViewModel::class.java)
         accountsViewModel.fetchAccounts()
-
-        btnRegister.setOnClickListener {
-            val action = LoginFragmentDirections.actionRegisterAccount()
-            Navigation.findNavController(it).navigate(action)
-        }
 
         btnLogin.setOnClickListener {
             doLogin(txtUsername.text.toString(),txtPassword.text.toString(),view)
