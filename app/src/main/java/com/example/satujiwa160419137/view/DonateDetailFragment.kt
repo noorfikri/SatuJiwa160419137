@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.util.loadImage
 import com.example.satujiwa160419137.viewmodel.DonationDetailViewModel
@@ -46,6 +48,12 @@ class DonateDetailFragment : Fragment() {
         donateDetailViewModel.get(donateID)
 
         observeDonateDetailViewModel(view)
+
+        val btnDonasiDetail = view.findViewById<Button>(R.id.btnDonasiDetail)
+        btnDonasiDetail.setOnClickListener{
+            val action = DonateDetailFragmentDirections.actionDonationFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     fun observeDonateDetailViewModel(view: View){

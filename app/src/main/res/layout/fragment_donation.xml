@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DonationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Pilih Nominal Donasi"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn100rb"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="Rp. 100.000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <Button
+            android:id="@+id/btn500rb"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Rp. 500.000"
+            app:layout_constraintEnd_toEndOf="@+id/btn100rb"
+            app:layout_constraintStart_toStartOf="@+id/btn100rb"
+            app:layout_constraintTop_toBottomOf="@+id/btn100rb" />
+
+        <Button
+            android:id="@+id/btn1jt"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Rp. 1.000.000"
+            app:layout_constraintEnd_toEndOf="@+id/btn500rb"
+            app:layout_constraintStart_toStartOf="@+id/btn500rb"
+            app:layout_constraintTop_toBottomOf="@+id/btn500rb" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtNominalDonasi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Rp. 1.000"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/btn1jt"
+            app:layout_constraintStart_toStartOf="@+id/btn1jt"
+            app:layout_constraintTop_toBottomOf="@+id/btn1jt">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnGoToDonasi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Donasi Sekarang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtNominalDonasi"
+            app:layout_constraintStart_toStartOf="@+id/txtNominalDonasi"
+            app:layout_constraintTop_toBottomOf="@+id/txtNominalDonasi" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
