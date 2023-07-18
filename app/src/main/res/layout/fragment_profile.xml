@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.ProfileFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.example.satujiwa160419137.model.Account" />
+
+        <variable
+            name="editProfileListener"
+            type="com.example.satujiwa160419137.view.EditProfileButtonListener" />
+
+        <variable
+            name="logoutListener"
+            type="com.example.satujiwa160419137.view.LogoutButtonListener" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".view.ProfileFragment">
 
         <TextView
             android:id="@+id/txtProfileUsername"
@@ -16,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/alata"
-            android:text="Username"
+            android:text="@{user.username}"
             android:textColor="#000000"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +58,8 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtProfileUsername" />
+            app:layout_constraintTop_toBottomOf="@+id/txtProfileUsername"
+            android:onClick="@{(view) -> editProfileListener.onEditProfileButton(view, user)}"/>
 
         <Button
             android:id="@+id/btnLogout2"
@@ -62,6 +75,7 @@
             app:iconTint="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnToEditProfile" />
+            app:layout_constraintTop_toBottomOf="@+id/btnToEditProfile"
+            android:onClick="@{logoutListener::onLogoutButton}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</layout>

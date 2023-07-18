@@ -51,7 +51,7 @@ class DonateDetailFragment : Fragment() {
 
         val btnDonasiDetail = view.findViewById<Button>(R.id.btnDonasiDetail)
         btnDonasiDetail.setOnClickListener{
-            val action = DonateDetailFragmentDirections.actionDonationFragment()
+            val action = DonateDetailFragmentDirections.actionDonationDetailBack()
             Navigation.findNavController(it).navigate(action)
         }
     }
@@ -73,7 +73,7 @@ class DonateDetailFragment : Fragment() {
             txtCreator.text = it.creator!!.username.toString()
 
             imgDonate.loadImage(it.img)
-            imgCreator.loadImage(it.creator.imgUrl)
+            imgCreator.loadImage(it.creator?.imgUrl)
         })
     }
 }

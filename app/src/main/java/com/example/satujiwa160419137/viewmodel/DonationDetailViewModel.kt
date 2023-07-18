@@ -8,12 +8,12 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.satujiwa160419137.model.Donate
+import com.example.satujiwa160419137.model.Donasi
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class DonationDetailViewModel(application: Application):AndroidViewModel(application) {
-    val donationLD = MutableLiveData<Donate>()
+    val donationLD = MutableLiveData<Donasi>()
     val TAG = "volleyDonationDetailTag"
     private var queue:RequestQueue? = null
 
@@ -23,8 +23,8 @@ class DonationDetailViewModel(application: Application):AndroidViewModel(applica
 
         val stringRequest = StringRequest(
             Request.Method.GET,url,{
-                val sType = object : TypeToken<Donate>(){}.type
-                val result = Gson().fromJson<Donate>(it,sType)
+                val sType = object : TypeToken<Donasi>(){}.type
+                val result = Gson().fromJson<Donasi>(it,sType)
 
                 donationLD.value = result
                 Log.d("detailvolley",result.toString())

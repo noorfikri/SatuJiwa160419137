@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.ProfileEditFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.example.satujiwa160419137.model.Account" />
+
+        <variable
+            name="editProfileListener"
+            type="com.example.satujiwa160419137.view.EditProfileButtonListener" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".view.ProfileEditFragment">
 
         <ImageView
             android:id="@+id/imgProfileEdit"
@@ -34,7 +43,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtUsernameProfileEdit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={user.username}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -51,7 +61,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtImgUrlEdit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={user.imgUrl}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -67,7 +78,8 @@
             app:iconTint="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout9"
+            android:onClick="@{(view) -> editProfileListener.onEditProfileButton(view, user)}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</layout>

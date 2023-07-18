@@ -5,21 +5,52 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.satujiwa160419137.model.Account
+import com.example.satujiwa160419137.util.buildDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class AccountLoginViewModel(application: Application):AndroidViewModel(application) {
+class AccountLoginViewModel(application: Application):AndroidViewModel(application), CoroutineScope {
     val loginAccountLD = MutableLiveData<Account>()
     val isLogedInLD = MutableLiveData<Boolean>()
 
-    fun checkLogin(){
+    private var job = Job()
 
-        Log.d("checklogin","checking login")
-        if(loginAccountLD.value == null){
-            isLogedInLD.value = false
-            Log.d("checklogin","account not loged in")
-        }else if (loginAccountLD.value != null){
-            isLogedInLD.value = true
-            Log.d("checklogin","account logged")
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
+
+    fun registerUser(user: List<Account>){
+        launch {
+            val db = buildDatabase(getApplication())
+
+           db.modelDao().insertUser(*user.toTypedArray())
         }
+//        Log.d("checklogin","checking login")
+//        if(loginAccountLD.value == null){
+//            isLogedInLD.value = false
+//            Log.d("checklogin","account not loged in")
+//        }else if (loginAccountLD.value != null){
+//            isLogedInLD.value = true
+//            Log.d("checklogin","account logged")
+//        }
+    }
+
+    fun checkLogin(username:String, password:String){
+        launch {
+            val db = buildDatabase(getApplication())
+
+            loginAccountLD.value = db.modelDao().selectSpecificUser(username, password)
+        }
+//        Log.d("checklogin","checking login")
+//        if(loginAccountLD.value == null){
+//            isLogedInLD.value = false
+//            Log.d("checklogin","account not loged in")
+//        }else if (loginAccountLD.value != null){
+//            isLogedInLD.value = true
+//            Log.d("checklogin","account logged")
+//        }
     }
 
     fun login(account:Account){

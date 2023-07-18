@@ -10,10 +10,10 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.satujiwa160419137.R
-import com.example.satujiwa160419137.model.Donate
+import com.example.satujiwa160419137.model.Donasi
 import com.example.satujiwa160419137.util.loadImage
 
-class DonateListAdapter(val donateList:ArrayList<Donate>) : RecyclerView.Adapter<DonateListAdapter.DonateViewHolder>() {
+class DonateListAdapter(val donateList:ArrayList<Donasi>) : RecyclerView.Adapter<DonateListAdapter.DonateViewHolder>() {
     class DonateViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(
@@ -57,7 +57,7 @@ class DonateListAdapter(val donateList:ArrayList<Donate>) : RecyclerView.Adapter
         return donateList.size
     }
 
-    fun updateDonateList(newDonateList: ArrayList<Donate>){
+    fun updateDonateList(newDonateList: ArrayList<Donasi>){
         donateList.clear()
         donateList.addAll(newDonateList)
         notifyDataSetChanged()

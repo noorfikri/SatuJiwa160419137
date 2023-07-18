@@ -6,39 +6,63 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.databinding.FragmentRegisterBinding
+import com.example.satujiwa160419137.model.Account
+import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  * Use the [RegisterFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RegisterFragment : Fragment() {
-
+class RegisterFragment : Fragment(), RegisterButtonListener {
+    private lateinit var loginAccountViewModel: AccountLoginViewModel
+    private lateinit var dataBinding: FragmentRegisterBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        dataBinding = DataBindingUtil.inflate<FragmentRegisterBinding>(inflater,R.layout.fragment_register, container, false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnRegister = view.findViewById<Button>(R.id.btnRegister)
-
-        btnRegister.setOnClickListener {
-            val action = RegisterFragmentDirections.actionRegisterBack()
-            Navigation.findNavController(it).navigate(action)
-        }
+        loginAccountViewModel = ViewModelProvider(this).get(AccountLoginViewModel::class.java)
+        dataBinding.user = Account("","","")
+        dataBinding.registerListener= this
+//        val btnRegister = view.findViewById<Button>(R.id.btnRegister)
+//
+//        btnRegister.setOnClickListener {
+//            val action = RegisterFragmentDirections.actionRegisterBack()
+//            Navigation.findNavController(it).navigate(action)
+//        }
     }
 
+    override fun onRegisterButton(v: View) {
+        val password = dataBinding.txtPasswordRegister.text.toString()
+        val repassword = dataBinding.txtRePasswordRegister.text.toString()
+
+        if(password == repassword){
+            val user = listOf(dataBinding.user!!)
+            loginAccountViewModel.registerUser(user)
+
+            val action = RegisterFragmentDirections.actionRegisterBack()
+            Navigation.findNavController(v).navigate(action)
+        }
+        else{
+            Toast.makeText(v.context,"Proses Register Gagal",Toast.LENGTH_LONG).show()
+        }
+    }
 }
