@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +12,7 @@ import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.databinding.FragmentRegisterBinding
 import com.example.satujiwa160419137.model.Account
+import com.example.satujiwa160419137.util.RegisterButtonListener
 import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
 
 // TODO: Rename parameter arguments, choose names that match

@@ -10,11 +10,11 @@
 
         <variable
             name="registerListener"
-            type="com.example.satujiwa160419137.view.RegisterButtonListener" />
+            type="com.example.satujiwa160419137.util.RegisterButtonListener" />
 
         <variable
             name="loginListener"
-            type="com.example.satujiwa160419137.view.LoginButtonListener" />
+            type="com.example.satujiwa160419137.util.LoginButtonListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

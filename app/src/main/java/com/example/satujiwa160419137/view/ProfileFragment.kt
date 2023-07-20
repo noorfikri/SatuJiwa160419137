@@ -17,6 +17,8 @@ import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.databinding.FragmentLoginBinding
 import com.example.satujiwa160419137.databinding.FragmentProfileBinding
 import com.example.satujiwa160419137.model.Account
+import com.example.satujiwa160419137.util.EditProfileButtonListener
+import com.example.satujiwa160419137.util.LogoutButtonListener
 import com.example.satujiwa160419137.util.loadImage
 import com.example.satujiwa160419137.viewmodel.AccountDetailViewModel
 import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel

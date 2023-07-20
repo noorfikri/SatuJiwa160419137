@@ -10,11 +10,11 @@
 
         <variable
             name="editProfileListener"
-            type="com.example.satujiwa160419137.view.EditProfileButtonListener" />
+            type="com.example.satujiwa160419137.util.EditProfileButtonListener" />
 
         <variable
             name="logoutListener"
-            type="com.example.satujiwa160419137.view.LogoutButtonListener" />
+            type="com.example.satujiwa160419137.util.LogoutButtonListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

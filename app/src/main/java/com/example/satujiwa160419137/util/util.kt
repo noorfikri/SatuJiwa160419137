@@ -8,7 +8,7 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.satujiwa160419137.R
-import com.example.satujiwa160419137.model.ModelDatabase
+import com.example.satujiwa160419137.model.AccountDatabase
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -26,20 +26,39 @@ fun ImageView.loadImage(url: String?){
         })
 }
 
-fun buildDatabase(context: Context):ModelDatabase{
+fun buildDatabase(context: Context):AccountDatabase{
     val db = Room.databaseBuilder(
-        context, ModelDatabase::class.java, "satujiwa"
-    ).addMigrations(MIGRATION_1_2).build()
+        context, AccountDatabase::class.java, "satujiwa"
+    ).addMigrations(ACCOUNTMIGRATION_1_1, DONATIONMIGRATION_1_1, HISTORYNMIGRATION_1_1).build()
 
     return db
 }
 
 
-val MIGRATION_1_2 =object : Migration(1,2){
+val ACCOUNTMIGRATION_1_1 =object : Migration(1,2){
     override fun migrate(database: SupportSQLiteDatabase) {
         database.execSQL(
-            "CREATE TABLE Account (id INTEGER PRIMARY KEY NOT NULL, username TEXT, password TEXT," +
+            "CREATE TABLE account (id INTEGER PRIMARY KEY NOT NULL, username TEXT, password TEXT," +
                     "img TEXT)"
+        )
+
+    }
+}
+
+val DONATIONMIGRATION_1_1 = object : Migration(1,2){
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "CREATE TABLE donasi (id INTEGER PRIMARY KEY NOT NULL, title TEXT, curval INTEGER, goalval INTEGER, detail TEXT," +
+                    "img TEXT, creator INTEGER)"
+        )
+
+    }
+}
+
+val HISTORYNMIGRATION_1_1 = object : Migration(1,2){
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL(
+            "CREATE TABLE history (id INTEGER PRIMARY KEY NOT NULL, donasi INTEGER)"
         )
 
     }

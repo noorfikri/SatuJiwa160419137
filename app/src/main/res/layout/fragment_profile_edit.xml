@@ -10,7 +10,7 @@
 
         <variable
             name="editProfileListener"
-            type="com.example.satujiwa160419137.view.EditProfileButtonListener" />
+            type="com.example.satujiwa160419137.util.EditProfileButtonListener" />
 
     </data>
 

@@ -28,14 +28,14 @@ class AccountDetailViewModel(application: Application):AndroidViewModel(applicat
     fun get(accountId:String){
         launch {
             val db = buildDatabase(getApplication())
-            accountLD.value = db.modelDao().selectSpecificUserById(accountId.toInt())
+            accountLD.value = db.AccountDAO().selectAccount(accountId.toInt())
         }
     }
 
     fun update(username:String, password:String, imgUrl:String, id:Int){
         launch {
             val db = buildDatabase(getApplication())
-            db.modelDao().updateUser(username, password,imgUrl, id)
+            db.AccountDAO().updateAccount(username, password,imgUrl, id)
         }
     }
 //    fun get(accountId:String){

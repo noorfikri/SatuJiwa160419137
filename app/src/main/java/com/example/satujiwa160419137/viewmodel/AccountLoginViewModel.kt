@@ -25,7 +25,7 @@ class AccountLoginViewModel(application: Application):AndroidViewModel(applicati
         launch {
             val db = buildDatabase(getApplication())
 
-           db.modelDao().insertUser(*user.toTypedArray())
+           db.AccountDAO().insertAllAccount(*user.toTypedArray())
         }
 //        Log.d("checklogin","checking login")
 //        if(loginAccountLD.value == null){
@@ -41,7 +41,7 @@ class AccountLoginViewModel(application: Application):AndroidViewModel(applicati
         launch {
             val db = buildDatabase(getApplication())
 
-            loginAccountLD.value = db.modelDao().selectSpecificUser(username, password)
+            loginAccountLD.value = db.AccountDAO().checkAccount(username,password)
         }
 //        Log.d("checklogin","checking login")
 //        if(loginAccountLD.value == null){

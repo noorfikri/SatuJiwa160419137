@@ -7,19 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.databinding.FragmentLoginBinding
-import com.example.satujiwa160419137.databinding.FragmentRegisterBinding
 import com.example.satujiwa160419137.model.Account
+import com.example.satujiwa160419137.util.LoginButtonListener
+import com.example.satujiwa160419137.util.RegisterButtonListener
 import com.example.satujiwa160419137.viewmodel.AccountListViewModel
 import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
-import com.google.android.material.textfield.TextInputEditText
-import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
