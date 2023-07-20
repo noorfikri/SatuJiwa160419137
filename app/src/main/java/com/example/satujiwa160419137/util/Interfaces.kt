@@ -7,6 +7,14 @@ interface RegisterButtonListener{
     fun onRegisterButton(v:View)
 }
 
+interface FABCreateDonationListener{
+    fun onFABCreateDonation(v: View)
+}
+
+interface CreateDonationListener{
+    fun onCreateDonation(v: View)
+}
+
 interface LoginButtonListener{
     fun onLoginButton(v:View)
 }

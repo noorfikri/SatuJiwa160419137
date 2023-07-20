@@ -31,6 +31,7 @@ class DonationListViewModel(application: Application):AndroidViewModel(applicati
         launch {
             val db = buildDonationDatabase(getApplication())
             donateLD.postValue(db.donationDAO().selectAllDonation())
+            loadingLD.postValue(false)
         }
 
         /*queue = Volley.newRequestQueue(getApplication())
@@ -53,6 +54,14 @@ class DonationListViewModel(application: Application):AndroidViewModel(applicati
 
         stringRequest.tag = TAG
         queue?.add(stringRequest)*/
+    }
+
+    fun createDonation(donasi: Donasi){
+        launch {
+            val db = buildDonationDatabase(getApplication())
+            db.donationDAO().insertAllDonation(donasi)
+
+        }
     }
 
     override fun onCleared() {

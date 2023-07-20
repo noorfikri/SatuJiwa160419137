@@ -10,14 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.databinding.FragmentDonateListBinding
+import com.example.satujiwa160419137.util.FABCreateDonationListener
 import com.example.satujiwa160419137.viewmodel.AccountLoginViewModel
 import com.example.satujiwa160419137.viewmodel.DonationListViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,16 +33,18 @@ private const val ARG_PARAM2 = "param2"
  * Use the [DonateListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DonateListFragment : Fragment() {
+class DonateListFragment : Fragment(), FABCreateDonationListener {
     private lateinit var donateListViewModel: DonationListViewModel
-    private val  donateListAdapter = DonateListAdapter(arrayListOf())
+    private var  donateListAdapter = DonateListAdapter(arrayListOf())
+    private lateinit var dataBinding: FragmentDonateListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_donate_list, container, false)
+        dataBinding = DataBindingUtil.inflate<FragmentDonateListBinding>(inflater,R.layout.fragment_donate_list, container, false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +58,10 @@ class DonateListFragment : Fragment() {
             Navigation.findNavController(view).navigate(action)
         }
 
+        dataBinding.fabCreateDonationListener = this
+
         val recView = view.findViewById<RecyclerView>(R.id.recViewDonateList)
+        val fabCreateDonation = view.findViewById<FloatingActionButton>(R.id.fabCreateDonation)
 
         donateListViewModel = ViewModelProvider(this).get(DonationListViewModel::class.java)
         donateListViewModel.getDonation()
@@ -78,5 +87,10 @@ class DonateListFragment : Fragment() {
                 progLoad.visibility = View.GONE
             }
         })
+    }
+
+    override fun onFABCreateDonation(v: View) {
+        val action = DonateListFragmentDirections.actionCreateDonation()
+        Navigation.findNavController(v).navigate(action)
     }
 }

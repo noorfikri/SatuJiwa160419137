@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley
 import com.example.satujiwa160419137.model.Account
 import com.example.satujiwa160419137.model.Donasi
 import com.example.satujiwa160419137.util.buildAccountDatabase
+import com.example.satujiwa160419137.util.buildDonationDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope

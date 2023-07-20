@@ -18,26 +18,27 @@ data class Account(
 }
 @Entity
 data class Donasi(
-    @PrimaryKey(autoGenerate = true)
-   val id:Int=0,
     @ColumnInfo(name="title")
-   val title:String?,
+   var title:String?,
     @ColumnInfo(name = "curval")
-   val curVal:Int?,
+   var curVal:Int?,
     @ColumnInfo(name="goalval")
-   val goalVal:Int?,
+   var goalVal:Int?,
     @ColumnInfo(name="detail")
-   val detail:String?,
+   var detail:String?,
     @ColumnInfo(name="img")
-   val img:String?,
+   var img:String?,
     @ColumnInfo(name="creator")
-   val creator:Int?,
+   var creator:Int?,
+
+    @PrimaryKey(autoGenerate = true)
+    var id:Int=0,
 )
 
 @Entity
 data class History(
     @PrimaryKey(autoGenerate = true)
-    val id:Int=0,
+    var id:Int=0,
     @ColumnInfo(name="donasi")
-    val donasi:Int?
+    var donasi:Int?
     ,)

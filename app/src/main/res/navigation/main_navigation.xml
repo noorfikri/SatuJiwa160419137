@@ -31,6 +31,9 @@
         <action
             android:id="@+id/actionDetailDonation"
             app:destination="@id/donateDetailFragment" />
+        <action
+            android:id="@+id/actionCreateDonation"
+            app:destination="@id/createDonationFragment" />
     </fragment>
     <fragment
         android:id="@+id/donateDetailFragment"
@@ -129,4 +132,13 @@
         android:name="com.example.satujiwa160419137.DonationFragment"
         android:label="fragment_donation"
         tools:layout="@layout/fragment_donation" />
+    <fragment
+        android:id="@+id/createDonationFragment"
+        android:name="com.example.satujiwa160419137.view.CreateDonationFragment"
+        android:label="fragment_create_donation"
+        tools:layout="@layout/fragment_create_donation" >
+        <action
+            android:id="@+id/actionDonationBack"
+            app:destination="@id/itemHome" />
+    </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -12,6 +13,7 @@ import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.model.AccountDatabase
 import com.example.satujiwa160419137.model.DonationDatabase
 import com.example.satujiwa160419137.model.HistoryDatabase
+import com.google.android.material.textfield.TextInputEditText
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -32,6 +34,22 @@ fun ImageView.loadImage(url: String?){
 @BindingAdapter("android:imageUrl")
 fun loadPhotoUrl(view: ImageView, url: String?){
     view.loadImage(url)
+}
+
+@BindingAdapter("android:text")
+fun setText(view: TextInputEditText, num:Int){
+    if(view.text != null && view.text.toString() != ""){
+        view.setText(num.toString())
+    }
+}
+
+@InverseBindingAdapter(attribute = "android:text")
+fun getText(view: TextInputEditText): Int {
+    if(view.text != null && view.text.toString() != ""){
+        return view.text.toString().toInt()
+    }else{
+        return 0
+    }
 }
 
 fun buildAccountDatabase(context: Context):AccountDatabase{
