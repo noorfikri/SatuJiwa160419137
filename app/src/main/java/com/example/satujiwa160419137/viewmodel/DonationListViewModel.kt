@@ -9,19 +9,31 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.satujiwa160419137.model.Donasi
+import com.example.satujiwa160419137.util.buildDonationDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class DonationListViewModel(application: Application):AndroidViewModel(application) {
-    val donateLD = MutableLiveData<ArrayList<Donasi>>()
+class DonationListViewModel(application: Application):AndroidViewModel(application),CoroutineScope {
+    val donateLD = MutableLiveData<List<Donasi>>()
     val loadingLD = MutableLiveData<Boolean>()
     val TAG = "volleyDonateListTag"
     private var queue:RequestQueue? = null
+    private val job = Job()
 
     fun getDonation() {
         loadingLD.value = true
 
-        queue = Volley.newRequestQueue(getApplication())
+        launch {
+            val db = buildDonationDatabase(getApplication())
+            donateLD.postValue(db.donationDAO().selectAllDonation())
+        }
+
+        /*queue = Volley.newRequestQueue(getApplication())
         val url = "https://api.npoint.io/8f8d91787ff7067eba58"
 
         val stringRequest = StringRequest(
@@ -40,11 +52,14 @@ class DonationListViewModel(application: Application):AndroidViewModel(applicati
             })
 
         stringRequest.tag = TAG
-        queue?.add(stringRequest)
+        queue?.add(stringRequest)*/
     }
 
     override fun onCleared() {
         super.onCleared()
         queue?.cancelAll(TAG)
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.IO
 }

@@ -17,7 +17,7 @@ interface AccountDAO {
     @Query("SELECT * FROM account WHERE id=:id")
     fun selectAccount(id:Int): Account
 
-    @Query("SELECT * FROM account WHERE username=:username, password=:password")
+    @Query("SELECT * FROM account WHERE username=:username AND password=:password")
     fun checkAccount(username: String, password: String):Account
 
     @Delete

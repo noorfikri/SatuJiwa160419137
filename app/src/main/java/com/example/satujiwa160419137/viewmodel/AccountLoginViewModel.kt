@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.satujiwa160419137.model.Account
-import com.example.satujiwa160419137.util.buildDatabase
+import com.example.satujiwa160419137.util.buildAccountDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,7 +23,7 @@ class AccountLoginViewModel(application: Application):AndroidViewModel(applicati
 
     fun registerUser(user: List<Account>){
         launch {
-            val db = buildDatabase(getApplication())
+            val db = buildAccountDatabase(getApplication())
 
            db.AccountDAO().insertAllAccount(*user.toTypedArray())
         }
@@ -39,7 +39,7 @@ class AccountLoginViewModel(application: Application):AndroidViewModel(applicati
 
     fun checkLogin(username:String, password:String){
         launch {
-            val db = buildDatabase(getApplication())
+            val db = buildAccountDatabase(getApplication())
 
             loginAccountLD.value = db.AccountDAO().checkAccount(username,password)
         }

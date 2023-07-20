@@ -30,9 +30,7 @@ class DonateListAdapter(val donateList:ArrayList<Donasi>) : RecyclerView.Adapter
         val txtTitle = holder.view.findViewById<TextView>(R.id.txtTitleDonate)
         val txtCurVal = holder.view.findViewById<TextView>(R.id.txtCurrDonate)
         val txtGoalVal = holder.view.findViewById<TextView>(R.id.txtGoalDonate)
-        val txtCreator = holder.view.findViewById<TextView>(R.id.txtCreatorDonate)
         val imgDonate = holder.view.findViewById<ImageView>(R.id.imgViewDonate)
-        val imgCreator = holder.view.findViewById<ImageView>(R.id.imgDonateCreator)
 
         var progressBar = holder.view.findViewById<ProgressBar>(R.id.progBarDonateList)
         val btnDetail = holder.view.findViewById<Button>(R.id.btnDonationDetail)
@@ -42,10 +40,8 @@ class DonateListAdapter(val donateList:ArrayList<Donasi>) : RecyclerView.Adapter
         txtTitle.text = donateList[position].title.toString()
         txtCurVal.text = donateList[position].curVal.toString()
         txtGoalVal.text = donateList[position].goalVal.toString()
-        txtCreator.text = donateList[position].creator!!.username.toString()
 
         imgDonate.loadImage(donateList[position].img)
-        imgCreator.loadImage(donateList[position].creator!!.imgUrl)
 
         btnDetail.setOnClickListener {
             val action = DonateListFragmentDirections.actionDetailDonation(donateID!!)
@@ -57,7 +53,7 @@ class DonateListAdapter(val donateList:ArrayList<Donasi>) : RecyclerView.Adapter
         return donateList.size
     }
 
-    fun updateDonateList(newDonateList: ArrayList<Donasi>){
+    fun updateDonateList(newDonateList: List<Donasi>){
         donateList.clear()
         donateList.addAll(newDonateList)
         notifyDataSetChanged()

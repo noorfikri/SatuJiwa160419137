@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.model.Account
+import com.example.satujiwa160419137.model.AccountDAO
 import com.example.satujiwa160419137.util.loadImage
 import com.example.satujiwa160419137.viewmodel.DonationDetailViewModel
 
@@ -66,14 +68,19 @@ class DonateDetailFragment : Fragment() {
             val imgDonate = view.findViewById<ImageView>(R.id.imgViewDonateDetail)
             val imgCreator = view.findViewById<ImageView>(R.id.imgDonateCreatorDetail)
 
+            donateDetailViewModel.getCreator(it.creator!!)
+
+            donateDetailViewModel.donationAccountLD.observe(viewLifecycleOwner,{
+                txtCreator.text = it!!.username.toString()
+                imgCreator.loadImage(it?.imgUrl)
+            })
+
             txtTitle.text = it.title.toString()
             txtCurVal.text = it.curVal.toString()
             txtGoalVal.text = it.goalVal.toString()
             txtDetail.text = it.detail.toString()
-            txtCreator.text = it.creator!!.username.toString()
 
             imgDonate.loadImage(it.img)
-            imgCreator.loadImage(it.creator?.imgUrl)
         })
     }
 }

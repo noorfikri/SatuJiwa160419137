@@ -9,7 +9,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.satujiwa160419137.model.Account
-import com.example.satujiwa160419137.util.buildDatabase
+import com.example.satujiwa160419137.util.buildAccountDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
@@ -27,14 +27,14 @@ class AccountDetailViewModel(application: Application):AndroidViewModel(applicat
 
     fun get(accountId:String){
         launch {
-            val db = buildDatabase(getApplication())
+            val db = buildAccountDatabase(getApplication())
             accountLD.value = db.AccountDAO().selectAccount(accountId.toInt())
         }
     }
 
     fun update(username:String, password:String, imgUrl:String, id:Int){
         launch {
-            val db = buildDatabase(getApplication())
+            val db = buildAccountDatabase(getApplication())
             db.AccountDAO().updateAccount(username, password,imgUrl, id)
         }
     }

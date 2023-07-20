@@ -9,6 +9,8 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.model.AccountDatabase
+import com.example.satujiwa160419137.model.DonationDatabase
+import com.example.satujiwa160419137.model.HistoryDatabase
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -26,10 +28,26 @@ fun ImageView.loadImage(url: String?){
         })
 }
 
-fun buildDatabase(context: Context):AccountDatabase{
+fun buildAccountDatabase(context: Context):AccountDatabase{
     val db = Room.databaseBuilder(
-        context, AccountDatabase::class.java, "satujiwa"
-    ).addMigrations(ACCOUNTMIGRATION_1_1, DONATIONMIGRATION_1_1, HISTORYNMIGRATION_1_1).build()
+        context, AccountDatabase::class.java, "satujiwaaccount"
+    ).addMigrations(ACCOUNTMIGRATION_1_1).build()
+
+    return db
+}
+
+fun buildDonationDatabase(context: Context):DonationDatabase{
+    val db = Room.databaseBuilder(
+        context, DonationDatabase::class.java, "satujiwadonation"
+    ).addMigrations(DONATIONMIGRATION_1_1).build()
+
+    return db
+}
+
+fun buildHistorytDatabase(context: Context):HistoryDatabase{
+    val db = Room.databaseBuilder(
+        context, HistoryDatabase::class.java, "satujiwahistor"
+    ).addMigrations(HISTORYNMIGRATION_1_1).build()
 
     return db
 }

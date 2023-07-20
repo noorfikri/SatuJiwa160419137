@@ -33,13 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/alata"
                 android:text="Title"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgDonateCreator" />
+                app:layout_constraintTop_toBottomOf="@+id/imgViewDonate" />
 
             <TextView
                 android:id="@+id/txtCurrDonate"
@@ -95,19 +95,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtTitleDonate" />
 
             <TextView
-                android:id="@+id/txtCreatorDonate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/alata"
-                android:text="Donate Creator"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/imgDonateCreator"
-                app:layout_constraintTop_toBottomOf="@+id/imgViewDonate" />
-
-            <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,16 +106,6 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/txtCurrDonate"
                 app:layout_constraintTop_toBottomOf="@+id/txtTitleDonate" />
-
-            <ImageView
-                android:id="@+id/imgDonateCreator"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgViewDonate"
-                tools:srcCompat="@tools:sample/avatars" />
 
             <ProgressBar
                 android:id="@+id/progressBarDonateList"

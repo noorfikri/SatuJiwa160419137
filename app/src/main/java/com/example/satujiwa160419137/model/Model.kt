@@ -31,7 +31,7 @@ data class Donasi(
     @ColumnInfo(name="img")
    val img:String?,
     @ColumnInfo(name="creator")
-   val creator:Account?,
+   val creator:Int?,
 )
 
 @Entity
@@ -39,5 +39,5 @@ data class History(
     @PrimaryKey(autoGenerate = true)
     val id:Int=0,
     @ColumnInfo(name="donasi")
-    val donasi:Donasi?
+    val donasi:Int?
     ,)
