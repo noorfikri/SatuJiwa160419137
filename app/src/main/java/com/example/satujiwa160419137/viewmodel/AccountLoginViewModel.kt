@@ -19,13 +19,13 @@ class AccountLoginViewModel(application: Application):AndroidViewModel(applicati
     private var job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = job + Dispatchers.IO
 
-    fun registerUser(user: List<Account>){
+    fun registerUser(user: Account){
         launch {
             val db = buildAccountDatabase(getApplication())
 
-           db.AccountDAO().insertAllAccount(*user.toTypedArray())
+           db.AccountDAO().insertAllAccount(user)
         }
 //        Log.d("checklogin","checking login")
 //        if(loginAccountLD.value == null){
@@ -41,7 +41,7 @@ class AccountLoginViewModel(application: Application):AndroidViewModel(applicati
         launch {
             val db = buildAccountDatabase(getApplication())
 
-            loginAccountLD.value = db.AccountDAO().checkAccount(username,password)
+            loginAccountLD.postValue(db.AccountDAO().checkAccount(username,password))
         }
 //        Log.d("checklogin","checking login")
 //        if(loginAccountLD.value == null){

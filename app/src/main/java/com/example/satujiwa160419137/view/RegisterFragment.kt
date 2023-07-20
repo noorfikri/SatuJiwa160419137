@@ -51,11 +51,12 @@ class RegisterFragment : Fragment(), RegisterButtonListener {
     }
 
     override fun onRegisterButton(v: View) {
+        val username = dataBinding.txtUsernameRegsiter.text.toString()
         val password = dataBinding.txtPasswordRegister.text.toString()
         val repassword = dataBinding.txtRePasswordRegister.text.toString()
 
         if(password == repassword){
-            val user = listOf(dataBinding.user!!)
+            val user = Account(username, password, "")
             loginAccountViewModel.registerUser(user)
 
             val action = RegisterFragmentDirections.actionRegisterBack()

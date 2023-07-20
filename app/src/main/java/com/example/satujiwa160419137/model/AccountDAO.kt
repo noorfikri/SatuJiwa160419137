@@ -11,6 +11,8 @@ interface AccountDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllAccount(vararg account: Account)
 
+
+
     @Query("SELECT * FROM account")
     fun selectAllAccount(): List<Account>
 
