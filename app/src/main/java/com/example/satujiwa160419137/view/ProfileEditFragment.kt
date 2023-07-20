@@ -1,5 +1,6 @@
 package com.example.satujiwa160419137.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.satujiwa160419137.databinding.FragmentProfileBinding
 import com.example.satujiwa160419137.databinding.FragmentProfileEditBinding
 import com.example.satujiwa160419137.model.Account
 import com.example.satujiwa160419137.util.EditProfileButtonListener
+import com.example.satujiwa160419137.util.DeleteAccountButtonListener
 import com.example.satujiwa160419137.util.loadImage
 import com.example.satujiwa160419137.viewmodel.AccountDetailViewModel
 
@@ -26,7 +28,7 @@ import com.example.satujiwa160419137.viewmodel.AccountDetailViewModel
  * Use the [ProfileEditFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProfileEditFragment : Fragment(), EditProfileButtonListener {
+class ProfileEditFragment : Fragment(), EditProfileButtonListener, DeleteAccountButtonListener {
     private lateinit var accountDetailViewModel: AccountDetailViewModel
     private lateinit var dataBinding: FragmentProfileEditBinding
 
@@ -55,6 +57,7 @@ class ProfileEditFragment : Fragment(), EditProfileButtonListener {
         }
 
         dataBinding.editProfileListener = this
+        dataBinding.deleteAccountListener = this
 
         accountDetailViewModel = ViewModelProvider(this).get(AccountDetailViewModel::class.java)
         accountDetailViewModel.get(accountId)
@@ -87,10 +90,26 @@ class ProfileEditFragment : Fragment(), EditProfileButtonListener {
         })
     }
 
+    fun doLogout(view: View){
+        val sharedFile = "com.example.satujiwa160419137"
+        val sharedPref = activity!!.getSharedPreferences(sharedFile, Context.MODE_PRIVATE)
+
+        sharedPref.edit().putString("LOGGED_ID","").apply()
+
+        val action = ProfileEditFragmentDirections.actionDeleteAccount()
+        Navigation.findNavController(view).navigate(action)
+    }
+
     override fun onEditProfileButton(v: View, obj: Account) {
         accountDetailViewModel.update(obj.username!!, obj.password!!, obj.imgUrl!!, obj.id)
 
         val action = ProfileEditFragmentDirections.actionProfileEditBack(obj.username.toString(),obj.imgUrl.toString())
         Navigation.findNavController(v).navigate(action)
+    }
+
+    override fun onDeleteAccountButton(v: View, account: Account){
+        accountDetailViewModel.delete(account)
+
+       doLogout(v)
     }
 }

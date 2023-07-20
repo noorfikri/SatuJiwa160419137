@@ -28,7 +28,7 @@ class AccountDetailViewModel(application: Application):AndroidViewModel(applicat
     fun get(accountId:String){
         launch {
             val db = buildAccountDatabase(getApplication())
-            accountLD.value = db.AccountDAO().selectAccount(accountId.toInt())
+            accountLD.postValue(db.AccountDAO().selectAccount(accountId.toInt()))
         }
     }
 
@@ -36,6 +36,13 @@ class AccountDetailViewModel(application: Application):AndroidViewModel(applicat
         launch {
             val db = buildAccountDatabase(getApplication())
             db.AccountDAO().updateAccount(username, password,imgUrl, id)
+        }
+    }
+
+    fun delete(account: Account){
+        launch {
+            val db = buildAccountDatabase(getApplication())
+            db.AccountDAO().deleteAccount(account)
         }
     }
 //    fun get(accountId:String){
@@ -65,5 +72,5 @@ class AccountDetailViewModel(application: Application):AndroidViewModel(applicat
     }
 
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = job + Dispatchers.IO
 }

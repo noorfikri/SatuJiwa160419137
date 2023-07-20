@@ -32,7 +32,7 @@ class ProfileListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_list, container, false)
+        return inflater.inflate(R.layout.fragment_histor_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class ProfileListFragment : Fragment() {
             Navigation.findNavController(view!!).navigate(action)
         }
 
-        val recView = view.findViewById<RecyclerView>(R.id.recViewProfileList)
+        val recView = view.findViewById<RecyclerView>(R.id.recViewHistoryList)
 
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = accountListAdapter
@@ -61,8 +61,8 @@ class ProfileListFragment : Fragment() {
             accountListAdapter.updateAccountList(it)
         })
         accountListViewModel.loadingLD.observe(viewLifecycleOwner,{
-            val progressLoad = view.findViewById<ProgressBar>(R.id.progLoadProfileList)
-            val recView = view.findViewById<RecyclerView>(R.id.recViewProfileList)
+            val progressLoad = view.findViewById<ProgressBar>(R.id.progLoadHistoryList)
+            val recView = view.findViewById<RecyclerView>(R.id.recViewHistoryList)
 
             if(it == true){
                 recView.visibility = View.GONE

@@ -11,7 +11,7 @@ data class Account(
     @ColumnInfo(name="password")
     var password:String?="",
     @ColumnInfo(name="img")
-    var imgUrl:String?,
+    var imgUrl:String?="",
 ){
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0

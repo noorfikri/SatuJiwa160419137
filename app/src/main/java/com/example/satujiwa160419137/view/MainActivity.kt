@@ -1,6 +1,5 @@
 package com.example.satujiwa160419137.view
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = findViewById(R.id.drawerLayout)
 
-        navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
+        navController = (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment).navController
         NavigationUI.setupActionBarWithNavController(this,navController)
 
         var bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)

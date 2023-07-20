@@ -85,12 +85,15 @@
         <argument
             android:name="userID"
             app:argType="string" />
+        <action
+            android:id="@+id/actionDeleteAccount"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemList"
         android:name="com.example.satujiwa160419137.view.ProfileListFragment"
         android:label="fragment_profile_list"
-        tools:layout="@layout/fragment_profile_list" >
+        tools:layout="@layout/fragment_histor_list" >
         <action
             android:id="@+id/actionProfileDetail"
             app:destination="@id/profileDetailFragment" />

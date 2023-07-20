@@ -56,7 +56,7 @@ class RegisterFragment : Fragment(), RegisterButtonListener {
         val repassword = dataBinding.txtRePasswordRegister.text.toString()
 
         if(password == repassword){
-            val user = Account(username, password, "")
+            val user = Account(username, password, "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-11.jpg")
             loginAccountViewModel.registerUser(user)
 
             val action = RegisterFragmentDirections.actionRegisterBack()

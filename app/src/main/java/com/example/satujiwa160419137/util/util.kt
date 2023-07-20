@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.View
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -28,6 +29,11 @@ fun ImageView.loadImage(url: String?){
         })
 }
 
+@BindingAdapter("android:imageUrl")
+fun loadPhotoUrl(view: ImageView, url: String?){
+    view.loadImage(url)
+}
+
 fun buildAccountDatabase(context: Context):AccountDatabase{
     val db = Room.databaseBuilder(
         context, AccountDatabase::class.java, "satujiwaaccount"
@@ -43,6 +49,8 @@ fun buildDonationDatabase(context: Context):DonationDatabase{
 
     return db
 }
+
+
 
 fun buildHistorytDatabase(context: Context):HistoryDatabase{
     val db = Room.databaseBuilder(

@@ -15,6 +15,10 @@ interface EditProfileButtonListener{
     fun onEditProfileButton(v: View,user:Account)
 }
 
+interface DeleteAccountButtonListener{
+    fun onDeleteAccountButton(v:View, account: Account)
+}
+
 interface LogoutButtonListener{
     fun onLogoutButton(v:View)
 }
