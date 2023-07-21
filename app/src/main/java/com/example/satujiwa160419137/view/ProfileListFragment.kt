@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.viewmodel.AccountListViewModel
+import com.example.satujiwa160419137.viewmodel.HistoryListViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileListFragment : Fragment() {
-    private lateinit var accountListViewModel: AccountListViewModel
+    private lateinit var historyListViewModel: HistoryListViewModel
     private val accountListAdapter = ProfileListAdapter(arrayListOf())
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,17 +51,17 @@ class ProfileListFragment : Fragment() {
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = accountListAdapter
 
-        accountListViewModel = ViewModelProvider(this).get(AccountListViewModel::class.java)
-        accountListViewModel.fetchAccounts()
+        historyListViewModel = ViewModelProvider(this).get(HistoryListViewModel::class.java)
+        historyListViewModel.getHistory()
 
         observeAccountListViewModel(view)
     }
 
     fun observeAccountListViewModel(view: View){
-        accountListViewModel.accountsLD.observe(viewLifecycleOwner,{
-            accountListAdapter.updateAccountList(it)
+        historyListViewModel.donateLD.observe(viewLifecycleOwner,{
+            accountListAdapter.updateHistoryList(it)
         })
-        accountListViewModel.loadingLD.observe(viewLifecycleOwner,{
+        historyListViewModel.loadingLD.observe(viewLifecycleOwner,{
             val progressLoad = view.findViewById<ProgressBar>(R.id.progLoadHistoryList)
             val recView = view.findViewById<RecyclerView>(R.id.recViewHistoryList)
 

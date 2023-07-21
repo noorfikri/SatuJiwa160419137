@@ -12,14 +12,17 @@ import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
 import com.example.satujiwa160419137.databinding.FragmentDonationBinding
 import com.example.satujiwa160419137.model.Donasi
+import com.example.satujiwa160419137.model.History
 import com.example.satujiwa160419137.util.DonationBackListener
 import com.example.satujiwa160419137.util.ValueDonationChangeListener
 import com.example.satujiwa160419137.viewmodel.DonationDetailViewModel
+import com.example.satujiwa160419137.viewmodel.HistoryListViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 
 class DonationFragment : Fragment(), ValueDonationChangeListener, DonationBackListener {
     private lateinit var donationDetailViewModel:DonationDetailViewModel
+    private lateinit var historyListViewModel: HistoryListViewModel
     private lateinit var dataBinding:FragmentDonationBinding
 
     override fun onCreateView(
@@ -48,6 +51,8 @@ class DonationFragment : Fragment(), ValueDonationChangeListener, DonationBackLi
         donationDetailViewModel = ViewModelProvider(this).get(DonationDetailViewModel::class.java)
         donationDetailViewModel.get(donateID.toInt())
 
+        historyListViewModel = ViewModelProvider(this).get(HistoryListViewModel::class.java)
+
         observeDonateDetailViewModel(view)
     }
 
@@ -71,6 +76,9 @@ class DonationFragment : Fragment(), ValueDonationChangeListener, DonationBackLi
         println("add donate val" + addValue.toString())
 
         donationDetailViewModel.makeDonation(donation.title!!,donation.detail!!,donation.curVal!! + addValue,donation.goalVal!!,donation.img!!,donation.creator!! ,donation.id)
+
+        val history = History(donation.title!!,donation.curVal!!,donation.goalVal!!,donation.detail!!,donation.img!!,donation.creator!!)
+        historyListViewModel.createHistory(history)
 
         print(donation)
         println("current donate val" + donation.curVal.toString())

@@ -37,8 +37,19 @@ data class Donasi(
 
 @Entity
 data class History(
+    @ColumnInfo(name="title")
+    var title:String?,
+    @ColumnInfo(name = "curval")
+    var curVal:Int?,
+    @ColumnInfo(name="goalval")
+    var goalVal:Int?,
+    @ColumnInfo(name="detail")
+    var detail:String?,
+    @ColumnInfo(name="img")
+    var img:String?,
+    @ColumnInfo(name="creator")
+    var creator:Int?,
+
     @PrimaryKey(autoGenerate = true)
     var id:Int=0,
-    @ColumnInfo(name="donasi")
-    var donasi:Int?
-    ,)
+)
