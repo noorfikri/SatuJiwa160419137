@@ -47,7 +47,7 @@
             android:name="donateID"
             app:argType="string" />
         <action
-            android:id="@+id/actionDonationFragment"
+            android:id="@+id/actionMakeDonation"
             app:destination="@id/donationFragment" />
     </fragment>
     <fragment
@@ -127,11 +127,18 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment" />
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/donationFragment"
-        android:name="com.example.satujiwa160419137.DonationFragment"
+        android:name="com.example.satujiwa160419137.view.DonationFragment"
         android:label="fragment_donation"
-        tools:layout="@layout/fragment_donation" />
+        tools:layout="@layout/fragment_donation" >
+        <action
+            android:id="@+id/actionMakeDonationBack"
+            app:destination="@id/donateDetailFragment" />
+        <argument
+            android:name="donateId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/createDonationFragment"
         android:name="com.example.satujiwa160419137.view.CreateDonationFragment"

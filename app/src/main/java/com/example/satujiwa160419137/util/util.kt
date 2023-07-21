@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.room.Room
@@ -38,8 +39,11 @@ fun loadPhotoUrl(view: ImageView, url: String?){
 
 @BindingAdapter("android:text")
 fun setText(view: TextInputEditText, num:Int){
+
     if(view.text != null && view.text.toString() != ""){
         view.setText(num.toString())
+    }else{
+        view.setText("0")
     }
 }
 
@@ -51,6 +55,24 @@ fun getText(view: TextInputEditText): Int {
         return 0
     }
 }
+
+@BindingAdapter("android:text")
+fun setText(view: TextView, num:Int){
+    if(view.text != null && view.text.toString() != ""){
+        view.setText(num.toString())
+    }
+}
+
+@InverseBindingAdapter(attribute = "android:text")
+fun getText(view: TextView): Int {
+    if(view.text != null && view.text.toString() != ""){
+        return view.text.toString().toInt()
+    }else{
+        return 0
+    }
+}
+
+
 
 fun buildAccountDatabase(context: Context):AccountDatabase{
     val db = Room.databaseBuilder(

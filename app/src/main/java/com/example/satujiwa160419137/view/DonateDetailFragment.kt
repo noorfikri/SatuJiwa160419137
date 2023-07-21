@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.satujiwa160419137.R
+import com.example.satujiwa160419137.databinding.FragmentDonateDetailBinding
 import com.example.satujiwa160419137.model.Account
 import com.example.satujiwa160419137.model.AccountDAO
+import com.example.satujiwa160419137.model.Donasi
+import com.example.satujiwa160419137.util.MakeDonationListener
 import com.example.satujiwa160419137.util.loadImage
 import com.example.satujiwa160419137.viewmodel.DonationDetailViewModel
 
@@ -26,15 +30,17 @@ private const val ARG_PARAM2 = "param2"
  * Use the [DonateDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DonateDetailFragment : Fragment() {
+class DonateDetailFragment : Fragment(), MakeDonationListener {
     private lateinit var donateDetailViewModel:DonationDetailViewModel
+    private lateinit var dataBinding:FragmentDonateDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_donate_detail, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_donate_detail, container, false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +53,7 @@ class DonateDetailFragment : Fragment() {
         }
 
         donateDetailViewModel = ViewModelProvider(this).get(DonationDetailViewModel::class.java)
-        donateDetailViewModel.get(donateID)
+        donateDetailViewModel.get(donateID.toInt())
 
         observeDonateDetailViewModel(view)
 
@@ -60,27 +66,34 @@ class DonateDetailFragment : Fragment() {
 
     fun observeDonateDetailViewModel(view: View){
         donateDetailViewModel.donationLD.observe(viewLifecycleOwner,{
-            val txtTitle = view.findViewById<TextView>(R.id.txtTitleDonateDetail)
+            dataBinding.donation = it
+            dataBinding.makeDonationListener = this
+            /*val txtTitle = view.findViewById<TextView>(R.id.txtTitleDonateDetail)*/
             val txtCurVal = view.findViewById<TextView>(R.id.txtCurrDonate3)
             val txtGoalVal = view.findViewById<TextView>(R.id.txtGoalDonate3)
-            val txtDetail = view.findViewById<TextView>(R.id.txtDonateDetail)
+            /*val txtDetail = view.findViewById<TextView>(R.id.txtDonateDetail)
             val txtCreator = view.findViewById<TextView>(R.id.txtCreatorDonateDetail)
             val imgDonate = view.findViewById<ImageView>(R.id.imgViewDonateDetail)
             val imgCreator = view.findViewById<ImageView>(R.id.imgDonateCreatorDetail)
 
-            donateDetailViewModel.getCreator(it.creator!!)
+            /*donateDetailViewModel.getCreator(it.creator!!)
 
             donateDetailViewModel.donationAccountLD.observe(viewLifecycleOwner,{
                 txtCreator.text = it!!.username.toString()
                 imgCreator.loadImage(it?.imgUrl)
-            })
+            })*/
 
-            txtTitle.text = it.title.toString()
+            txtTitle.text = it.title.toString()*/
             txtCurVal.text = it.curVal.toString()
             txtGoalVal.text = it.goalVal.toString()
-            txtDetail.text = it.detail.toString()
+            /*txtDetail.text = it.detail.toString()
 
-            imgDonate.loadImage(it.img)
+            imgDonate.loadImage(it.img)*/
         })
+    }
+
+    override fun onMakeDonation(v: View, donasi: Donasi) {
+        val action = DonateDetailFragmentDirections.actionMakeDonation(v.tag.toString())
+        Navigation.findNavController(v).navigate(action)
     }
 }

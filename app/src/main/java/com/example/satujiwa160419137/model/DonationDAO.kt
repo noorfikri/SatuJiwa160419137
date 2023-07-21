@@ -7,7 +7,7 @@ interface DonationDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllDonation(vararg donasi: Donasi)
 
-    @Query("SELECT * FROM donasi")
+    @Query("SELECT * FROM donasi ORDER BY id DESC")
     fun selectAllDonation(): List<Donasi>
 
     @Query("SELECT * FROM donasi WHERE id= :id")
@@ -16,8 +16,6 @@ interface DonationDAO {
     @Delete
     fun deleteDonation(donasi: Donasi)
 
-    @Query("UPDATE donasi SET title=:title, curval=:curval, goalval=:goalval, detail=:detail, img=:img, account=:accountId WHERE id =:id")
-    fun updateDonation(title:String,detail:String, curval:Int, goalval:Int, img:String, account:Account, id:Int){
-        val accountId = account.id
-    }
+    @Query("UPDATE donasi SET title=:title, detail=:detail, curval=:curval, goalval=:goalval, img=:img, creator=:accountId WHERE id=:id")
+    fun updateDonation(title:String,detail:String, curval:Int, goalval:Int, img:String, accountId:Int, id:Int)
 }

@@ -27,31 +27,26 @@ class DonationDetailViewModel(application: Application):AndroidViewModel(applica
     private var queue:RequestQueue? = null
     private val job = Job()
 
-    fun get(donateId:String){
-        queue = Volley.newRequestQueue(getApplication())
-        val url = "https://api.npoint.io/8f8d91787ff7067eba58/"+donateId
+    fun get(donateId:Int){
+        launch {
+            val db = buildDonationDatabase(getApplication())
+            donationLD.postValue(db.donationDAO().selectDonation(donateId))
+        }
 
-        val stringRequest = StringRequest(
-            Request.Method.GET,url,{
-                val sType = object : TypeToken<Donasi>(){}.type
-                val result = Gson().fromJson<Donasi>(it,sType)
+    }
 
-                donationLD.value = result
-                Log.d("detailvolley",result.toString())
-            },{
-                Log.d("detailvolley",it.toString())
-            }
-        )
+    fun makeDonation(title:String, detail:String, curval:Int, goalval:Int, img:String, creator:Int,donateId: Int){
+        launch {
+            val db = buildDonationDatabase(getApplication())
+            db.donationDAO().updateDonation(title,detail,curval,goalval,img,creator,donateId)
 
-        stringRequest.tag = TAG
-        queue?.add(stringRequest)
-
+        }
     }
 
     fun getCreator(id:Int){
         launch {
             val db = buildAccountDatabase(getApplication())
-            donationAccountLD.value = db.AccountDAO().selectAccount(id)
+            donationAccountLD.postValue(db.AccountDAO().selectAccount(id))
         }
     }
 

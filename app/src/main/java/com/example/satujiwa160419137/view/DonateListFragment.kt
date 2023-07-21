@@ -61,7 +61,6 @@ class DonateListFragment : Fragment(), FABCreateDonationListener {
         dataBinding.fabCreateDonationListener = this
 
         val recView = view.findViewById<RecyclerView>(R.id.recViewDonateList)
-        val fabCreateDonation = view.findViewById<FloatingActionButton>(R.id.fabCreateDonation)
 
         donateListViewModel = ViewModelProvider(this).get(DonationListViewModel::class.java)
         donateListViewModel.getDonation()
