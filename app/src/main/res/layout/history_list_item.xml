@@ -57,7 +57,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/alata"
-                    android:text="@{history.curVal}"
+                    android:text="@={history.curVal}"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -70,7 +70,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/alata"
-                    android:text="@{history.goalVal}"
+                    android:text="@={history.goalVal}"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -109,6 +109,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:min="0"
+                    android:max="@{history.goalVal}"
+                    android:progress="@{history.curVal}"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/txtGoalDonate" />
             </androidx.constraintlayout.widget.ConstraintLayout>

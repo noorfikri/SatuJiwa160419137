@@ -9,8 +9,8 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/itemList"
-        android:icon="@drawable/baseline_list_24"
-        android:title="Profile List"
+        android:icon="@drawable/baseline_history_24"
+        android:title="History"
         app:showAsAction="always" />
     <item
         android:id="@+id/itemProfile"

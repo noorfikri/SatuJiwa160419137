@@ -58,14 +58,14 @@ fun getText(view: TextInputEditText): Int {
 
 @BindingAdapter("android:text")
 fun setText(view: TextView, num:Int){
-    if(view.text != null && view.text.toString() != "" && view.text.toString().toIntOrNull() != null){
-        view.setText(num.toString())
+    if(view.text != null && view.text.toString().toIntOrNull() != null){
+        view.text = num.toString()
     }
 }
 
 @InverseBindingAdapter(attribute = "android:text")
 fun getText(view: TextView): Int {
-    if(view.text != null && view.text.toString() != "" && view.text.toString().toIntOrNull() != null){
+    if(view.text != null && view.text.toString().toIntOrNull() != null){
         return view.text.toString().toInt()
     }else{
         return 0
